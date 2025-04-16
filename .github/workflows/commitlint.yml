@@ -24,8 +24,10 @@ jobs:
           cache: "pnpm"
 
       - name: Install dependencies
+        working-directory: full-kit
         run: pnpm install
 
       - name: Validate PR commits with commitlint
         if: github.event_name == 'pull_request'
+        working-directory: full-kit
         run: pnpm exec commitlint --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }} --verbose

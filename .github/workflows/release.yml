@@ -37,12 +37,15 @@ jobs:
           cache: "pnpm"
 
       - name: Install dependencies
+        working-directory: full-kit
         run: pnpm install
 
       - name: Verify the integrity of provenance attestations and registry signatures for installed dependencies
+        working-directory: full-kit
         run: npm audit signatures
 
       - name: Release
+        working-directory: full-kit
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: pnpm exec semantic-release

@@ -102,8 +102,11 @@
     "zod": "3.23.8"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.8.0",
+    "@commitlint/config-conventional": "^19.8.0",
     "@eslint/compat": "1.2.7",
     "@ianvs/prettier-plugin-sort-imports": "4.4.1",
+    "@semantic-release/github": "^11.0.1",
     "@tailwindcss/postcss": "4.0.17",
     "@tailwindcss/typography": "0.5.15",
     "@types/eslint__eslintrc": "2.1.2",
@@ -120,6 +123,7 @@
     "prettier": "3.5.3",
     "prettier-plugin-tailwindcss": "0.6.11",
     "prisma": "5.20.0",
+    "semantic-release": "^24.2.3",
     "tailwindcss": "4.1.3",
     "tw-animate-css": "1.2.5",
     "typescript": "5"
@@ -127,6 +131,5 @@
   "overrides": {
     "@types/react": "19.0.12",
     "@types/react-dom": "19.0.4"
-  },
-  "packageManager": "pnpm@10.8.1"
+  }
 }
