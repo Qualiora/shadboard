@@ -42,6 +42,18 @@ npm install
 npm run dev
 ```
 
+## Keep `starter-kit` and `full-kit` in Sync
+
+If your contribution involves code that exists in both the `full-kit` and `starter-kit` directories (e.g., shared components, layout structure, configuration), **please make sure to reflect any applicable changes in both directories**.
+
+- The `full-kit` contains the complete feature set, while the `starter-kit` is a minimal version designed for quick starts.
+- When updating or adding features in `full-kit`, check if the same component or logic also exists in `starter-kit`.
+- **If the feature involves Internationalization (I18n), Authentication, or Customizer**, these features are **not included in `starter-kit`**, so **you must remove these features** before adding the code to `starter-kit`.
+
+This ensures that the `starter-kit` remains lean and free from dependencies that may not be required by all users.
+
+Keeping both kits aligned helps us avoid drift and ensures a smooth developer experience across setups.
+
 ## Commit Convention
 
 Before submitting a pull request, we kindly ask that you check whether your commits align with the conventions used in this repository. This helps maintain consistency and clarity in the commit history.

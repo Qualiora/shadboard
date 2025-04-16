@@ -62,17 +62,13 @@
 
 **Shadboard** offers easy theme customization, allowing you to choose from pre-defined colors, border radii, and modes to match your brand’s identity effortlessly. Whether you're building a light or dark theme, Shadboard provides the flexibility to quickly adjust the look and feel of your dashboard. Tailor the dashboard's appearance to your project's unique needs with just a few clicks!
 
-## Changelog
-
-Stay up to date with the latest features, bug fixes, and improvements in **Shadboard**. Check out the full changelog here: [Changelog](https://github.com/Qualiora/shadboard/blob/main/CHANGELOG.md)
-
 ## Documentation
 
 Get started with detailed instructions and guides to help you integrate and customize **Shadboard** into your projects. Visit the full documentation here: [Docs](https://shadboard.vercel.app/docs)
 
 ## Contributing
 
-We welcome contributions from the community! If you’d like to report bugs, suggest features, or contribute code, please check out our [contributing guidelines](https://github.com/Qualiora/shadboard/blob/main/.github/CONTRIBUTING.md) for everything you need to get started.
+We welcome contributions from the community! If you’d like to report bugs, suggest features, or contribute code, please check out our [contributing guidelines](https://github.com/Qualiora/shadboard/blob/main/CONTRIBUTING.md) for everything you need to get started.
 
 ## Live Demo
 
