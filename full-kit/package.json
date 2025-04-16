@@ -7,6 +7,10 @@
     "name": "Layth Alqadhi",
     "url": "https://github.com/LaythAlqadhi"
   },
+  "engines": {
+    "node": ">=22",
+    "pnpm": ">=10"
+  },
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
