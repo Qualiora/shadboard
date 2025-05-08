@@ -7,7 +7,7 @@ import { ToggleMobileSidebar } from "./toggle-mobile-sidebar"
 
 export function DocsHeader() {
   return (
-    <header className="sticky top-0 w-full bg-background z-50">
+    <header className="sticky top-0 w-full border-b bg-background z-50">
       <div className="container flex justify-between items-center gap-2 p-4">
         <Link href="/docs" className="inline-flex text-foreground font-black">
           <Image
