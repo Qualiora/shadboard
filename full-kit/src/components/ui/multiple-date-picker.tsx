@@ -45,12 +45,19 @@ export function MultipleDatesPicker({
       <PopoverTrigger asChild>
         <Button
           variant="outline"
-          className={cn("w-full px-3 text-start font-normal", buttonClassName)}
+          className={cn("w-full px-3 text-start font-normal h-auto", buttonClassName)}
           {...buttonOptions}
         >
           {value && value.length > 0 ? (
-            <span>
-              {value.map((date) => format(date, formatStr)).join(", ")}
+            <span className="flex flex-wrap basis-[fit-content]">
+              {value?.map((date, index) => (
+                <div
+                  className="d-inline-block me-1 mb-1 rounded-md border px-2.5 py-0.5 text-foreground text-xs lg:text-sm"
+                  key={index}
+                >
+                  {format(date, formatStr)}
+                </div>
+              ))}
             </span>
           ) : (
             <span className="text-muted-foreground">{placeholder}</span>
