@@ -45,17 +45,20 @@ export function MultipleDatesPicker({
       <PopoverTrigger asChild>
         <Button
           variant="outline"
-          className={cn("w-full px-3 text-start font-normal", buttonClassName)}
+          className={cn(
+            "w-full px-3 text-start font-normal overflow-hidden",
+            buttonClassName
+          )}
           {...buttonOptions}
         >
           {value && value.length > 0 ? (
-            <span>
+            <div className="truncate me-1">
               {value.map((date) => format(date, formatStr)).join(", ")}
-            </span>
+            </div>
           ) : (
             <span className="text-muted-foreground">{placeholder}</span>
           )}
-          <CalendarIcon className="ms-auto h-4 w-4 text-muted-foreground" />
+          <CalendarIcon className="shrink-0 ms-auto h-4 w-4 text-muted-foreground" />
         </Button>
       </PopoverTrigger>
       <PopoverContent

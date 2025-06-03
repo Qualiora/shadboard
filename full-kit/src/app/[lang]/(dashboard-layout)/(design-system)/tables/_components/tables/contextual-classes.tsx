@@ -13,9 +13,9 @@ import {
 } from "@/components/ui/table"
 
 const statusClasses: Record<InvoiceType["status"], string> = {
-  Paid: "bg-green-100 hover:bg-green-200",
-  Pending: "bg-yellow-100 hover:bg-yellow-200",
-  Overdue: "bg-red-100 hover:bg-red-200",
+  Paid: "bg-green-100 text-green-700 hover:bg-green-200",
+  Pending: "bg-yellow-100 text-yellow-700 hover:bg-yellow-200",
+  Overdue: "bg-red-100 text-red-700 hover:bg-red-200",
 }
 
 export default function ContextualClasses() {
