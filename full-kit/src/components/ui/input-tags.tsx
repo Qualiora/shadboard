@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useImperativeHandle, useRef, useState } from "react"
+import { useEffect, useId, useImperativeHandle, useRef, useState } from "react"
 import { X } from "lucide-react"
 
 import type { ComponentProps, KeyboardEvent } from "react"
@@ -121,9 +121,12 @@ export function InputTagsWithSuggestions({
   className,
   ...props
 }: InputTagsWithSuggestionsProps) {
+  const listboxId = useId()
   const [inputValue, setInputValue] = useState("")
   const [open, setOpen] = useState(false)
+  const [highlightedIndex, setHighlightedIndex] = useState(-1)
   const containerRef = useRef<HTMLDivElement>(null)
+  const listRef = useRef<HTMLDivElement>(null)
   const [popoverWidth, setPopoverWidth] = useState<number | undefined>(
     undefined
   )
@@ -140,6 +143,19 @@ export function InputTagsWithSuggestions({
       !tags.includes(suggestion)
   )
 
+  // Reset highlighted index when input value changes
+  useEffect(() => {
+    setHighlightedIndex(-1)
+  }, [inputValue])
+
+  // Scroll highlighted item into view
+  useEffect(() => {
+    if (highlightedIndex >= 0 && listRef.current) {
+      const items = listRef.current.querySelectorAll("[cmdk-item]")
+      items[highlightedIndex]?.scrollIntoView({ block: "nearest" })
+    }
+  }, [highlightedIndex])
+
   const addTag = (tag: string) => {
     const trimmedTag = tag.trim()
     if (trimmedTag && !tags.includes(trimmedTag)) {
@@ -153,16 +169,58 @@ export function InputTagsWithSuggestions({
   }
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter" && !open) {
+    if (e.key === "ArrowDown") {
       e.preventDefault()
-      addTag(inputValue)
+      if (!open && filteredSuggestions.length > 0) {
+        setOpen(true)
+      }
+      if (filteredSuggestions.length > 0) {
+        setHighlightedIndex((prev) =>
+          prev < filteredSuggestions.length - 1 ? prev + 1 : 0
+        )
+      }
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault()
+      if (!open && filteredSuggestions.length > 0) {
+        setOpen(true)
+      }
+      if (filteredSuggestions.length > 0) {
+        setHighlightedIndex((prev) =>
+          prev > 0 ? prev - 1 : filteredSuggestions.length - 1
+        )
+      }
+    } else if (e.key === "Enter") {
+      e.preventDefault()
+      if (
+        highlightedIndex >= 0 &&
+        highlightedIndex < filteredSuggestions.length
+      ) {
+        addTag(filteredSuggestions[highlightedIndex])
+        setHighlightedIndex(-1)
+      } else if (!open) {
+        addTag(inputValue)
+      }
+    } else if (e.key === "Escape" && open) {
+      setOpen(false)
+      setHighlightedIndex(-1)
     } else if (e.key === "Backspace" && !inputValue && tags.length > 0) {
       removeTag(tags.length - 1)
     }
   }
 
+  // Derive the highlighted value for cmdk's controlled selection
+  const highlightedValue =
+    highlightedIndex >= 0 ? (filteredSuggestions[highlightedIndex] ?? "") : ""
+
   return (
-    <Popover modal open={open} onOpenChange={setOpen}>
+    <Popover
+      modal
+      open={open}
+      onOpenChange={(isOpen) => {
+        setOpen(isOpen)
+        if (!isOpen) setHighlightedIndex(-1)
+      }}
+    >
       <PopoverTrigger asChild>
         <div
           data-slot="input-tags-with-suggestions"
@@ -194,6 +252,10 @@ export function InputTagsWithSuggestions({
           <input
             ref={props.ref}
             type="text"
+            role="combobox"
+            aria-expanded={open}
+            aria-controls={listboxId}
+            aria-autocomplete="list"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={handleKeyDown}
@@ -208,13 +270,22 @@ export function InputTagsWithSuggestions({
         onOpenAutoFocus={(e) => e.preventDefault()}
       >
         <ScrollArea className="flex flex-col max-h-[300px]">
-          <Command>
-            <CommandList className="max-h-full">
+          <Command
+            shouldFilter={false}
+            value={highlightedValue}
+            onValueChange={() => {}}
+          >
+            <CommandList ref={listRef} id={listboxId} className="max-h-full">
               <CommandEmpty>No results found.</CommandEmpty>
-              {filteredSuggestions.map((suggestion) => (
+              {filteredSuggestions.map((suggestion, index) => (
                 <CommandItem
                   key={suggestion}
-                  onSelect={() => addTag(suggestion)}
+                  value={suggestion}
+                  onMouseMove={() => setHighlightedIndex(index)}
+                  onSelect={() => {
+                    addTag(suggestion)
+                    setHighlightedIndex(-1)
+                  }}
                 >
                   {suggestion}
                 </CommandItem>
