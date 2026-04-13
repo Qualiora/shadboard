@@ -147,13 +147,11 @@ export const navigationsData: NavigationType[] = [
         items: [
           {
             title: "List",
-            href: "/",
-            label: "Soon",
+            href: "/pages/customers/list",
           },
           {
             title: "Details",
-            href: "/",
-            label: "Soon",
+            href: "/pages/customers/CUS-1001",
           },
         ],
       },
