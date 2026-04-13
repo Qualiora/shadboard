@@ -45,7 +45,7 @@ export function Editor({
     editorProps: {
       attributes: {
         class: cn(
-          "px-3 py-2 break-all [&_p]:m-0 [&_.is-editor-empty]:before:absolute [&_.is-editor-empty]:before:top-2 [&_.is-editor-empty]:before:cursor-text [&_.is-editor-empty]:before:text-muted-foreground [&_.is-editor-empty]:before:content-[attr(data-placeholder)] prose prose-headings:font-normal prose-headings:text-foreground prose-h1:text-2xl prose-h2:text-xl prose-h3:text-lg dark:prose-invert focus:outline-hidden",
+          "px-3 py-2 break-all [&_p]:m-0 [&_.is-editor-empty]:before:absolute [&_.is-editor-empty]:before:top-2 [&_.is-editor-empty]:before:cursor-text [&_.is-editor-empty]:before:text-muted-foreground [&_.is-editor-empty]:before:content-[attr(data-placeholder)] prose prose-headings:font-normal prose-headings:text-foreground prose-strong:text-inherit prose-h1:text-2xl prose-h2:text-xl prose-h3:text-lg dark:prose-invert focus:outline-hidden",
           className
         ),
       },

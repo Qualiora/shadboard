@@ -107,6 +107,9 @@ export function SidebarProvider({
         event.key === SIDEBAR_KEYBOARD_SHORTCUT &&
         (event.metaKey || event.ctrlKey)
       ) {
+        // Don't toggle sidebar when inside a contenteditable element (e.g., rich text editor)
+        if ((event.target as HTMLElement)?.isContentEditable) return
+
         event.preventDefault()
         toggleSidebar()
       }
